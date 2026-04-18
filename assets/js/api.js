@@ -1,11 +1,19 @@
-const API_URL = "https://news.stakemail91.workers.dev/";
-
 async function getNews() {
-  const apiNews = await fetch(API_URL).then(r => r.json());
+  try {
+    const res = await fetch("https://news.stakemail91.workers.dev/");
+    return await res.json();
+  } catch (e) {
+    console.log("API ERROR:", e);
 
-  const manual = JSON.parse(localStorage.getItem("manual") || "[]");
-
-  return {
-    articles: [...manual, ...apiNews.articles]
-  };
+    // 🔥 FALLBACK DATA (biar gak kosong)
+    return {
+      articles: [
+        {
+          title: "Contoh berita offline",
+          description: "Worker/API tidak aktif",
+          urlToImage: "https://via.placeholder.com/300"
+        }
+      ]
+    };
+  }
 }
