@@ -1,3 +1,2 @@
 User-agent: *
 Allow: /
-Sitemap: https://simquring.github.io/news/sitemap.xml
